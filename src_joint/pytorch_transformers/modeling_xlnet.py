@@ -738,8 +738,9 @@ class XLNetModel(XLNetPreTrainedModel):
         # https://github.com/KhalilMrini/LAL-Parser/commit/cfecc1a5a9b05c1ebe01a99a9537c1b092dabf6e
         # solved on Jan 8, 2023.
         # self.word_embedding = nn.Embedding(config.n_token, config.d_model)
-        import pdb; pdb.set_trace()
-        self.word_embedding = nn.Embedding(config.vocab_size, config.d_model)
+        # self.word_embedding = nn.Embedding(config.vocab_size, config.d_model)
+        self.word_embedding = nn.Embedding(32000, config.d_model)
+        # import pdb; pdb.set_trace()
         self.mask_emb = nn.Parameter(torch.FloatTensor(1, 1, config.d_model))
         self.layer = nn.ModuleList([XLNetLayer(config) for _ in range(config.n_layer)])
         self.dropout = nn.Dropout(config.dropout)
@@ -1043,7 +1044,8 @@ class XLNetLMHeadModel(XLNetPreTrainedModel):
 
         self.transformer = XLNetModel(config)
         # self.lm_loss = nn.Linear(config.d_model, config.n_token, bias=True)
-        self.lm_loss = nn.Linear(config.d_model, config.vocab_size, bias=True)
+        # self.lm_loss = nn.Linear(config.d_model, config.vocab_size, bias=True)
+        self.lm_loss = nn.Linear(config.d_model, 32000, bias=True)
 
         self.apply(self.init_weights)
         self.tie_weights()
