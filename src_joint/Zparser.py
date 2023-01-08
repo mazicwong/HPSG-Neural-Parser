@@ -289,7 +289,9 @@ class MultiHeadAttention(nn.Module):
         q_padded = Variable(q_padded)
         k_padded = Variable(k_padded)
         v_padded = Variable(v_padded)
-        invalid_mask = torch_t.ByteTensor(mb_size, len_padded).fill_(True)
+        # On Jan 8, 2023. Solved "dim mismatch" follow https://github.com/DoodleJZ/HPSG-Neural-Parser/issues/7
+        # invalid_mask = torch_t.ByteTensor(mb_size, len_padded).fill_(True)
+        invalid_mask = torch_t.BoolTensor(mb_size, len_padded).fill_(True)
 
         for i, (start, end) in enumerate(zip(batch_idxs.boundaries_np[:-1], batch_idxs.boundaries_np[1:])):
             q_padded[:,i,:end-start,:] = q_s[:,start:end,:]
@@ -327,22 +329,26 @@ class MultiHeadAttention(nn.Module):
         return outputs
 
     def forward(self, inp, batch_idxs, qk_inp=None):
-        residual = inp
+        residual = inp  # 25, 1024
 
-        q_s, k_s, v_s = self.split_qkv_packed(inp, qk_inp=qk_inp)
+        q_s, k_s, v_s = self.split_qkv_packed(inp, qk_inp=qk_inp)  # 8,25,64
 
+        # q_padded = 16,20,64;
+        # attn_mask = 16,20,20;
+        # output_mask = 16,20;
         q_padded, k_padded, v_padded, attn_mask, output_mask = self.pad_and_rearrange(q_s, k_s, v_s, batch_idxs)
 
-        outputs_padded, attns_padded = self.attention(
+        outputs_padded, attns_padded = self.attention(  # torch.Size([16, 20, 64]); torch.Size([16, 20, 20])
             q_padded, k_padded, v_padded,
             attn_mask=attn_mask
             )
-        outputs = outputs_padded[output_mask]
-        outputs = self.combine_v(outputs)
+        outputs = outputs_padded[output_mask]  # 320,64
+        outputs = self.combine_v(outputs)  # 320,64 -> 40,1024
 
-        outputs = self.residual_dropout(outputs, batch_idxs)
-        import pdb; pdb.set_trace()
+        outputs = self.residual_dropout(outputs, batch_idxs)  # 40, 1024
+        # import pdb; pdb.set_trace()
 
+        # (40,1024 + 25,1024)
         return self.layer_norm(outputs + residual), attns_padded
 
 #
