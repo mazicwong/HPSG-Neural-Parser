@@ -11,6 +11,9 @@
 # --model-path-base models/joint_bert_dev=95.55_devuas=96.67_devlas=94.86.pt
 
 
+# Jan 8, 2023. Run done.
+# Todo. replace glove with better one.
+
 python src_joint/main.py parse \
 --dataset ptb \
 --save-per-sentences 1000 \
