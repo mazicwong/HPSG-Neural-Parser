@@ -341,6 +341,7 @@ class MultiHeadAttention(nn.Module):
         outputs = self.combine_v(outputs)
 
         outputs = self.residual_dropout(outputs, batch_idxs)
+        import pdb; pdb.set_trace()
 
         return self.layer_norm(outputs + residual), attns_padded
 
