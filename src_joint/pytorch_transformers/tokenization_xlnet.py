@@ -76,6 +76,8 @@ class XLNetTokenizer(PreTrainedTokenizer):
         except ImportError:
             logger.warning("You need to install SentencePiece to use XLNetTokenizer: https://github.com/google/sentencepiece"
                            "pip install sentencepiece")
+            import pdb; pdb.set_trace()
+            # os.system("pip install sentencepiece")
 
         self.do_lower_case = do_lower_case
         self.remove_space = remove_space
