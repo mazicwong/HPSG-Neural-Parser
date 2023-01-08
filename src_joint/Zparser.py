@@ -11,16 +11,16 @@ use_cuda = torch.cuda.is_available()
 use_cuda = False
 if use_cuda:
     torch_t = torch.cuda
-    def from_numpy(ndarray):
-        return torch.from_numpy(ndarray).pin_memory().cuda(async=True)
+    # def from_numpy(ndarray):
+    #     return torch.from_numpy(ndarray).pin_memory().cuda(async=True)
 else:
     print("Not using CUDA!")
     torch_t = torch
     from torch import from_numpy
 
-# import pyximport
-# pyximport.install(setup_args={"include_dirs": np.get_include()})
-#import src_dep_const_test.chart_helper as chart_helper
+import pyximport
+pyximport.install(setup_args={"include_dirs": np.get_include()})
+# import src_dep_const_test.chart_helper as chart_helper
 import hpsg_decoder
 import const_decoder
 import makehp

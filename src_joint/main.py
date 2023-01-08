@@ -626,6 +626,7 @@ def run_parse(args):
 
     info = torch_load(args.model_path_base)
     assert 'hparams' in info['spec'], "Older savefiles not supported"
+    import pdb; pdb.set_trace()
     parser = Zparser.ChartParser.from_spec(info['spec'], info['state_dict'])
     parser.eval()
     print("Parsing sentences...")
