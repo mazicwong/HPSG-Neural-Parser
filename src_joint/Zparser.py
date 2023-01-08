@@ -8,6 +8,7 @@ import torch.nn as nn
 import torch.nn.init as init
 
 use_cuda = torch.cuda.is_available()
+use_cuda = False
 if use_cuda:
     torch_t = torch.cuda
     def from_numpy(ndarray):
