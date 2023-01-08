@@ -1,0 +1,2 @@
+this is a example input files
+If you want to parse the sentences, after setting the input file and pre-trained model, run following command
