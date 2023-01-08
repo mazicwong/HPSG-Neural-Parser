@@ -18,8 +18,8 @@ else:
     torch_t = torch
     from torch import from_numpy
 
-import pyximport
-pyximport.install(setup_args={"include_dirs": np.get_include()})
+# import pyximport
+# pyximport.install(setup_args={"include_dirs": np.get_include()})
 #import src_dep_const_test.chart_helper as chart_helper
 import hpsg_decoder
 import const_decoder
