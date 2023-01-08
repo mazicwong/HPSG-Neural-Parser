@@ -20,5 +20,5 @@ python src_joint/main.py parse \
 --output-path-syndep output_syndephead.txt \
 --output-path-synlabel output_syndeplabel.txt \
 --embedding-path data/glove.6B.100d.txt.gz \
---model-path-base models/joint_cwt_best_dev=93.85_devuas=95.87_devlas=94.47.pt
-# joint_xlnet_dev=96.03_devuas=96.96_devlas=95.32.pt
+--model-path-base models/joint_xlnet_dev=96.03_devuas=96.96_devlas=95.32.pt
+#--model-path-base models/joint_cwt_best_dev=93.85_devuas=95.87_devlas=94.47.pt
