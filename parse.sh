@@ -19,7 +19,7 @@ python src_joint/main.py parse \
 --dataset ptb \
 --save-per-sentences 1000 \
 --eval-batch-size 50 \
---input-path input_s.txt \
+--input-path trec6/test /en.classification.txt \
 --output-path-synconst output_synconst.txt \
 --output-path-syndep output_syndephead.txt \
 --output-path-synlabel output_syndeplabel.txt \
