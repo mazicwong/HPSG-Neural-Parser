@@ -12,7 +12,7 @@ do
 for DATA_FILE in ${FILE};
 do
 
-python preprocess_null_string.py ${DATA_NAME}/${DATA_TYPE}/${DATA_FILE}
+python preprocess_null_string.py --path ${DATA_NAME}/${DATA_TYPE}/${DATA_FILE}
 
 python src_joint/main.py parse \
 --dataset ptb \
