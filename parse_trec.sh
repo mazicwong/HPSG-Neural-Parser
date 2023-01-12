@@ -13,7 +13,7 @@
 export NAME="trec6"
 export TYPE="train valid test"
 export FILE="en.classification.txt text_original.txt"
-for DATA_NAME in ${DATA};
+for DATA_NAME in ${NAME};
 do
 mkdir parser_output_${DATA_NAME}
 for DATA_TYPE in ${TYPE};
