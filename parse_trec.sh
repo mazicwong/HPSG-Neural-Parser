@@ -11,11 +11,14 @@ for DATA_TYPE in ${TYPE};
 do
 for DATA_FILE in ${FILE};
 do
+
+python preprocess_null_string.py ${DATA_NAME}/${DATA_TYPE}/${DATA_FILE}
+
 python src_joint/main.py parse \
 --dataset ptb \
 --save-per-sentences 1000 \
 --eval-batch-size 50 \
---input-path ${DATA_NAME}/${DATA_TYPE}/${DATA_FILE} \
+--input-path ./tmp.txt \
 --output-path-synconst parser_output_${DATA_NAME}/${DATA_TYPE}_${DATA_FILE}_synconst.txt \
 --output-path-syndep   parser_output_${DATA_NAME}/${DATA_TYPE}_${DATA_FILE}_syndephead.txt \
 --output-path-synlabel parser_output_${DATA_NAME}/${DATA_TYPE}_${DATA_FILE}_syndeplabel.txt \
