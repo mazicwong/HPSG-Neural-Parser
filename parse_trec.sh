@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# trec6 atis
-export NAME="trec50"
+# trec6 atis trec50 sst5
+export NAME="sst5"
 export TYPE="train valid test"
 export FILE="en.classification.txt text_original.txt"
 for DATA_NAME in ${NAME};
