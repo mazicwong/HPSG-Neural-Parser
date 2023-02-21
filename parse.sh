@@ -12,9 +12,9 @@
 
 
 # Jan 8, 2023. Run done.
+# this script is test example
 # Todo. replace glove with better one.
 # Todo. Try https://github.com/KhalilMrini/LAL-Parser
-
 python src_joint/main.py parse \
 --dataset ptb \
 --save-per-sentences 1000 \
